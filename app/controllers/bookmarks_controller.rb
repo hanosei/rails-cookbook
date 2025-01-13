@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   def new
     @category = Category.find(params[:category_id])
     @bookmark = Bookmark.new
-    @recipes = Recipe.all # Allows user to select from all recipes
+    @recipes = Recipe.all
   end
 
   def create
