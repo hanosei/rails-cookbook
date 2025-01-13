@@ -1,0 +1,19 @@
+<h1>Add Recipe to <%= @category.name %></h1>
+
+<%= form_with model: @bookmark, url: category_bookmarks_path(@category) do |form| %>
+  <div>
+    <%= form.label :recipe_id, "Select a Recipe" %>
+    <%= form.collection_select :recipe_id, @recipes, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.label :comment, "Add a Comment" %>
+    <%= form.text_field :comment %>
+  </div>
+
+  <div>
+    <%= form.submit "Add Recipe" %>
+  </div>
+<% end %>
+
+<%= link_to "Back to Category", category_path(@category) %>
