@@ -7,7 +7,8 @@ class BookmarksController < ApplicationController
 
   def create
     @category = Category.find(params[:category_id])
-    @bookmark = @category.bookmarks.build(bookmark_params)
+    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark.category = @category
 
     if @bookmark.save
       redirect_to category_path(@category), notice: "Recipe successfully added to the category!"
@@ -20,7 +21,7 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to category_path(params[:category_id]), notice: "Recipe successfully removed from the category!"
+    redirect_to category_path(@bookmark.category), notice: "Recipe successfully removed from the category!"
   end
 
   private

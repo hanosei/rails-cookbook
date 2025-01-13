@@ -3,10 +3,10 @@
 <h2>Recipes in this Category:</h2>
 
 <ul>
-  <% @category.recipes.each do |recipe| %>
+  <% @category.bookmarks.each do |bookmark| %>
     <li>
-      <%= recipe.name %> |
-      <%= link_to "Delete", category_bookmark_path(@category, @category.bookmarks.find_by(recipe: recipe)), method: :delete, data: { confirm: "Are you sure?" } %>
+      <%= bookmark.recipe.name %> |
+      <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
     </li>
   <% end %>
 </ul>
