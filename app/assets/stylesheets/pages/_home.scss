@@ -1,1 +1,10 @@
 // Specific CSS for your home-page
+.info-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px;
+
+  a {
+    color: white;
+  }
+}

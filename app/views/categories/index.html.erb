@@ -1,12 +1,24 @@
-<h1>Recipe Cookbook</h1>
-<h2>Categories</h2>
+<div class="banner" style="background-image: url('<%= "https://plus.unsplash.com/premium_photo-1671377387797-8d3307a546a6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y29va2luZ3xlbnwwfHwwfHx8MA%3D%3D"%>')">
+  <div>
+  <h1>Cookbook</h1>
+  <h3>Save your favourite recipes</h3>
+  </div>
+</div>
 
-<ul>
-  <% @categories.each do |category| %>
-    <li>
-      <%= link_to category.name, category %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="info-top">
+    <h2>Categories</h2>
+    <%= link_to "Add Category", new_category_path, class:"btn btn-warning" %>
+  </div>
 
-<%= link_to "Add New Category", new_category_path %>
+  <div class="cards">
+    <% @categories.each do |category| %>
+      <%= link_to category_path(category) do %>
+      <div class="card-category" style="background-image: url('<%= "https://images.unsplash.com/photo-1528712306091-ed0763094c98?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29va2luZ3xlbnwwfHwwfHx8MA%3D%3D"%>')">
+        <h2><%= category.name%></h2>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
