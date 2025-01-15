@@ -1,49 +1,45 @@
-<div class="banner" style="background-image: url('<%= "https://plus.unsplash.com/premium_photo-1671377387797-8d3307a546a6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y29va2luZ3xlbnwwfHwwfHx8MA%3D%3D"%>')">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= @category.photo.attached? ? cl_image_path(@category.photo.key) : "default_image_url_here" %>'); height: 300px;">
   <div>
-  <h1>Cookbook</h1>
-  <h3>Save your favourite recipes</h3>
+    <h1><%= @category.name %></h1>
+    <h3>Save your favourite recipes</h3>
   </div>
 </div>
 
 <div class="container">
    <div class="info-top">
-    <h2>Recipes</h2>
+    <h1>Recipes</h1>
     <%= link_to "Add Recipe", new_category_bookmark_path(@category), class:"btn btn-warning" %>
   </div>
-</div>
 
-<div class="cards">
-  <% @category.bookmarks.each do |bookmark| %>
-  <div class="card-recipe">
-    <img src="<%=bookmark.recipe.image_url%>" alt="recipe_image">
+  <div class="cards">
+    <% @category.bookmarks.each do |bookmark| %>
+      <div class="card-recipe">
+        <i class="fa-solid fa-trash-can-xmark"><%= link_to "Delete recipe", bookmark_path(bookmark),
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%></i>
+        <img src="<%=bookmark.recipe.image_url%>" alt="recipe_image">
 
-    <div class="card-recipe-description">
-    <h2><%= bookmark.recipe.name %></h2>
-    <p><%= bookmark.recipe.description.truncate(200) %></p>
-    </div>
+        <div class="card-recipe-description">
+          <h2><%= bookmark.recipe.name %></h2>
+          <p><%= bookmark.recipe.description.truncate(200) %></p>
+        </div>
 
-    <div class="card-recipe-info">
-      <div>
-      <%= bookmark.comment %>
+        <div class="card-recipe-info">
+          <div>
+          <%= bookmark.comment %>
+          </div>
+
+          <div>
+            <%= bookmark.recipe.rating %> <%= '⭐️' * bookmark.recipe.rating %>
+          </div>
+        </div>
+
       </div>
-      <div>
-        <%= bookmark.recipe.rating %> <%= '⭐️' * bookmark.recipe.rating %>
-      </div>
-    </div>
+    <% end %>
   </div>
-  <% end %>
+
 </div>
 
-<h1>Category: <%= @category.name %></h1>
-<%= link_to "Add Recipe to Category", new_category_bookmark_path(@category) %>
-<h2>Recipes in this Category:</h2>
-
-<ul>
-  <% @category.bookmarks.each do |bookmark| %>
-    <li>
-      <%= bookmark.recipe.name %> |
-      <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-    </li>
-  <% end %>
-</ul>
-<%= link_to "Home", categories_path %>
+<%# <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+ <%# <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+      <%# <i class="fa-solid fa-trash-can-xmark"></i> %>
+      <%# <% end %>

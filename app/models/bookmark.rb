@@ -1,6 +1,7 @@
 class Bookmark < ApplicationRecord
   belongs_to :recipe
   belongs_to :category
+  has_one_attached :photo
 
   validates :recipe, presence: true
   validates :category, presence: true

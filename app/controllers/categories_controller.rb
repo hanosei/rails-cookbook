@@ -20,9 +20,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to category_path(category), notice: "Category successfully removed!"
+  end
+
   private
 
   def category_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :photo)
   end
 end
